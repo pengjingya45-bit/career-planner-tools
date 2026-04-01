@@ -6,71 +6,138 @@
 <title>职业规划四工具 | 学生成长助手</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:"PingFang SC","Microsoft YaHei",sans-serif}
-:root{--primary:#3a86ff;--primary-light:#7289da;--secondary:#3f37c9;--accent:#4cc9f0;--bg-main:#f8f9fa;--bg-card:#fff;--text-main:#2b2d42;--text-gray:#6c757d;--shadow:0 4px 12px rgba(0,0,0,0.06);--radius:14px;--radius-sm:8px}
-body{background:linear-gradient(135deg,#f04ff 0%,#e8f4f8 100%);color:var(--text-main);min-height:100vh;line-height:1.6}
+:root{
+  --primary:#3a86ff;--primary-light:#7289da;--secondary:#3f37c9;--accent:#4cc9f0;
+  --bg-main:#f8f9fa;--bg-card:#fff;--text-main:#2b2d42;--text-gray:#6c757d;
+  --shadow:0 4px 12px rgba(0,0,0,0.06);--radius:14px;--radius-sm:8px
+}
+body{background:linear-gradient(135deg,#eef2ff 0%,#e8f4f8 100%);color:var(--text-main);min-height:100vh;line-height:1.6}
+
+/* NAV */
 .navbar{background:var(--bg-card);box-shadow:var(--shadow);padding:1rem 6%;position:sticky;top:0;z-index:100}
-.nav-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:1.6rem;font-weight:700;color:var(--primary)}
-.nav-links{display:flex;gap:1.8rem;list-style:none}
-.nav-links a{text-decoration:none;color:var(--text-main);font-weight:500;padding:0.5rem 0;border-bottom:2px solid transparent;transition:all 0.3s}
+.nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:1.4rem;font-weight:700;color:var(--primary)}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--text-main);font-weight:500;padding:0.5rem 0;border-bottom:2px solid transparent;transition:all 0.3s;cursor:pointer}
 .nav-links a:hover,.nav-links a.active{color:var(--primary);border-bottom-color:var(--primary)}
-.container{max-width:1400px;margin:2rem auto;padding:0 6%}
-.welcome-card{background:var(--bg-card);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);margin-bottom:2rem;text-align:center}
-.welcome-card h1{color:var(--primary);margin-bottom:0.6rem;font-size:2rem}
-.welcome-card p{color:var(--text-gray);font-size:1.1rem}
+
+/* LAYOUT */
+.container{max-width:1200px;margin:2rem auto;padding:0 6%}
+.welcome-card{background:var(--bg-card);border-radius:var(--radius);padding:1.8rem 2rem;box-shadow:var(--shadow);margin-bottom:2rem;text-align:center}
+.welcome-card h1{color:var(--primary);margin-bottom:0.5rem;font-size:1.8rem}
+.welcome-card p{color:var(--text-gray);font-size:1rem}
 .tool-page{display:none}
-.tool-page.active{display:block;animation:fadeIn 0.4s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.chat-section{background:var(--bg-card);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow)}
-.mood-selector{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
-.mood-btn{padding:0.6rem 1.2rem;border:2px solid var(--primary-light);background:var(--bg-card);color:var(--primary);border-radius:20px;font-weight:500;cursor:pointer;transition:all 0.3s}
-.mood-btn:hover,.mood-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-.chat-window{background:var(--bg-main);border-radius:var(--radius-sm);padding:1.5rem;min-height:280px;max-height:450px;overflow-y:auto;margin-bottom:1.5rem}
-.chat-message{margin-bottom:1rem;padding:1rem;border-radius:var(--radius-sm);max-width:82%}
-.bot-message{background:var(--primary-light);color:#fff}
-.user-message{background:var(--accent);color:#fff;margin-left:auto}
-.input-area{display:flex;gap:1rem;align-items:center}
-#userInput{flex:1;padding:1rem;border:2px solid #e2e8f0;border-radius:var(--radius-sm);font-size:1rem}
-#userInput:focus{outline:none;border-color:var(--primary)}
-.send-btn{padding:1rem 1.8rem;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;transition:background 0.3s}
-.send-btn:hover{background:var(--secondary)}
-.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem}
-.swot-box{background:var(--bg-main);padding:1.5rem;border-radius:var(--radius-sm);box-shadow:0 2px 6px rgba(0,0,0,0.05)}
-.swot-box h4{margin-bottom:0.8rem;color:var(--primary)}
-textarea{width:100%;min-height:100px;padding:0.8rem;border:1px solid #ddd;border-radius:var(--radius-sm);resize:vertical;margin-bottom:0.8rem}
-.btn-group{display:flex;gap:1rem;margin-top:1rem}
-.btn{padding:0.8rem 1.4rem;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;border:none;transition:all 0.3s}
+.tool-page.active{display:block;animation:fadeIn 0.35s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--bg-card);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow)}
+
+/* INPUTS */
+.name-input,select,input[type=text]{
+  padding:0.75rem 1rem;border:1.5px solid #e2e8f0;border-radius:var(--radius-sm);
+  font-size:0.95rem;background:var(--bg-card);color:var(--text-main);width:100%;
+  transition:border-color 0.2s;font-family:inherit
+}
+.name-input{max-width:320px;margin-bottom:1.5rem}
+.name-input:focus,select:focus,input[type=text]:focus{outline:none;border-color:var(--primary)}
+textarea{
+  width:100%;padding:0.75rem 1rem;border:1.5px solid #e2e8f0;border-radius:var(--radius-sm);
+  font-size:0.9rem;resize:vertical;min-height:100px;font-family:inherit;
+  color:var(--text-main);background:var(--bg-card);transition:border-color 0.2s
+}
+textarea:focus{outline:none;border-color:var(--primary)}
+
+/* BUTTONS */
+.btn{padding:0.75rem 1.4rem;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;border:none;transition:all 0.3s;font-size:0.95rem}
 .btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover{background:var(--secondary)}
+.btn-primary:hover{background:var(--secondary);transform:translateY(-1px)}
+.btn-primary:disabled{background:#a0aec0;cursor:not-allowed;transform:none}
 .btn-light{background:#e9ecef;color:var(--text-main)}
 .btn-light:hover{background:#dee2e6}
-.result-area{margin-top:1.5rem;padding:1.5rem;background:var(--bg-main);border-radius:var(--radius-sm);display:none}
-.goal-form{display:grid;gap:1.2rem}
-.form-group{display:flex;flex-direction:column;gap:0.6rem}
-.form-group label{font-weight:500}
-select{padding:0.8rem;border:1px solid #ddd;border-radius:var(--radius-sm);font-size:1rem;background:var(--bg-card)}
-select option:first-child{color:var(--text-gray)}
-.cert-tabs{display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:1.5rem}
-.cert-tab{padding:0.6rem 1.2rem;background:#e9ecef;border-radius:20px;cursor:pointer}
-.cert-tab.active{background:var(--primary);color:#fff}
-.cert-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
-.cert-card{background:var(--bg-card);border-radius:var(--radius-sm);padding:1.5rem;box-shadow:var(--shadow)}
-.cert-card h4{color:var(--primary);margin-bottom:0.6rem}
-.cert-tag{display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.8rem;margin-right:0.5rem;margin-bottom:0.5rem}
-.tag-level{background:#e8f4f8;color:var(--primary)}
-.tag-price{background:#fff3cd;color:#856404}
-.tag-cycle{background:#d1ecf1;color:#0c5460}
-.cert-card p{margin:0.6rem 0;color:var(--text-gray)}
-.name-input{width:100%;max-width:300px;padding:0.8rem;border:1px solid #ddd;border-radius:var(--radius-sm);margin-bottom:1.5rem;font-size:1rem}
-.name-input:focus{outline:none;border-color:var(--primary)}
-@media (max-width:768px){
-.nav-links{gap:1rem}
-.welcome-card h1{font-size:1.6rem}
-.swot-grid{grid-template-columns:1fr}
-.input-area{flex-direction:column;align-items:stretch}
-.send-btn{width:100%}
-.btn-group{flex-direction:column}
-.name-input{max-width:100%}
+.btn-group{display:flex;gap:0.8rem;margin-top:1.2rem;flex-wrap:wrap}
+
+/* RESULT AREA */
+.result-area{
+  margin-top:1.5rem;padding:1.5rem;background:#f8faff;
+  border-radius:var(--radius-sm);border-left:4px solid var(--primary);
+  display:none;line-height:1.8;white-space:pre-wrap;font-size:0.95rem
+}
+.result-area.show{display:block}
+.result-area h4{color:var(--primary);margin-bottom:0.8rem;font-size:1.05rem}
+.loading-dots::after{content:'';animation:dots 1.2s infinite}
+@keyframes dots{0%{content:''}33%{content:'.'}66%{content:'..'}100%{content:'...'}}
+
+/* ===== TREEHOUSE ===== */
+.mood-selector{display:flex;gap:0.7rem;flex-wrap:wrap;margin-bottom:1.2rem;align-items:center}
+.mood-label{color:var(--text-gray);font-size:0.9rem;margin-right:0.3rem}
+.mood-btn{
+  padding:0.5rem 1.1rem;border:1.5px solid var(--primary-light);background:var(--bg-card);
+  color:var(--primary);border-radius:20px;font-size:0.88rem;cursor:pointer;transition:all 0.25s
+}
+.mood-btn:hover,.mood-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+.chat-window{
+  background:#f8faff;border-radius:var(--radius-sm);padding:1.2rem;
+  min-height:260px;max-height:400px;overflow-y:auto;margin-bottom:1.2rem;
+  border:1.5px solid #e2e8f0;display:flex;flex-direction:column;gap:0.8rem
+}
+.chat-msg{padding:0.9rem 1.1rem;border-radius:12px;max-width:80%;font-size:0.92rem;line-height:1.7;word-break:break-word}
+.bot-msg{background:var(--primary);color:#fff;align-self:flex-start;border-radius:4px 12px 12px 12px}
+.user-msg{background:#e8f4f8;color:var(--text-main);align-self:flex-end;border-radius:12px 4px 12px 12px}
+.thinking-msg{background:#f0f0f0;color:var(--text-gray);align-self:flex-start;font-style:italic;font-size:0.85rem;border-radius:4px 12px 12px 12px}
+.chat-input-row{display:flex;gap:0.8rem;align-items:flex-end}
+.chat-input-row textarea{min-height:60px;max-height:120px;margin-bottom:0;flex:1}
+.send-btn{padding:0.85rem 1.5rem;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-weight:600;cursor:pointer;transition:all 0.25s;white-space:nowrap;align-self:flex-end}
+.send-btn:hover{background:var(--secondary)}
+.send-btn:disabled{background:#a0aec0;cursor:not-allowed}
+.chat-hint{font-size:0.82rem;color:var(--text-gray);margin-bottom:0.8rem}
+
+/* ===== SWOT ===== */
+.swot-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:0.5rem}
+.swot-box{background:#f8faff;padding:1.2rem;border-radius:var(--radius-sm);border:1.5px solid #e2e8f0}
+.swot-box h4{margin-bottom:0.4rem;font-size:1rem}
+.swot-box .hint{color:var(--text-gray);font-size:0.82rem;margin-bottom:0.7rem}
+.swot-S h4{color:#27ae60}.swot-W h4{color:#e74c3c}.swot-O h4{color:#3498db}.swot-T h4{color:#e67e22}
+
+/* ===== GOAL ===== */
+.goal-form{display:grid;gap:1rem}
+.form-group label{display:block;font-weight:500;margin-bottom:0.4rem;font-size:0.92rem}
+.horizon-row{display:flex;gap:0.6rem;flex-wrap:wrap}
+.horizon-btn{
+  padding:0.55rem 1.1rem;border:1.5px solid #e2e8f0;border-radius:20px;
+  background:var(--bg-card);color:var(--text-gray);font-size:0.88rem;cursor:pointer;transition:all 0.25s
+}
+.horizon-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* ===== CERTS ===== */
+.cert-filter-row{display:flex;gap:0.7rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.cert-filter-btn{
+  padding:0.5rem 1.1rem;background:#e9ecef;border-radius:20px;
+  cursor:pointer;font-size:0.88rem;transition:all 0.25s;border:none;color:var(--text-main)
+}
+.cert-filter-btn.active{background:var(--primary);color:#fff}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem}
+.cert-card{background:var(--bg-card);border-radius:var(--radius-sm);padding:1.3rem;box-shadow:var(--shadow);border-top:3px solid var(--primary);transition:transform 0.2s}
+.cert-card:hover{transform:translateY(-3px)}
+.cert-card h4{color:var(--text-main);margin-bottom:0.6rem;font-size:1rem}
+.cert-card p{color:var(--text-gray);font-size:0.88rem;line-height:1.6;margin-bottom:0.8rem}
+.cert-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.6rem}
+.cert-tag{display:inline-block;padding:0.25rem 0.7rem;border-radius:20px;font-size:0.78rem;font-weight:500}
+.tag-level-entry{background:#d4edda;color:#155724}
+.tag-level-mid{background:#cce5ff;color:#004085}
+.tag-level-adv{background:#fff3cd;color:#856404}
+.tag-level-intl{background:#e2d9f3;color:#6f42c1}
+.tag-cost{background:#fff3e0;color:#e65100}
+.tag-duration{background:#e0f2f1;color:#00695c}
+.cert-org{font-size:0.8rem;color:var(--text-gray);margin-top:0.4rem}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{gap:0.8rem}
+  .nav-links a{font-size:0.88rem}
+  .swot-grid{grid-template-columns:1fr}
+  .chat-input-row{flex-direction:column}
+  .send-btn{width:100%}
+  .name-input{max-width:100%}
+  .welcome-card h1{font-size:1.4rem}
 }
 </style>
 </head>
@@ -78,25 +145,28 @@ select option:first-child{color:var(--text-gray)}
 
 <nav class="navbar">
   <div class="nav-container">
-    <div class="logo">职业规划四工具</div>
+    <div class="logo">🌱 职业规划助手</div>
     <ul class="nav-links">
-      <li><a href="#" class="nav-item active" data-page="home">AI树洞</a></li>
-      <li><a href="#" class="nav-item" data-page="swot">SWOT分析</a></li>
-      <li><a href="#" class="nav-item" data-page="goal">目标生成器</a></li>
-      <li><a href="#" class="nav-item" data-page="cert">证书推荐</a></li>
+      <li><a class="nav-item active" data-page="home">AI 树洞</a></li>
+      <li><a class="nav-item" data-page="swot">SWOT 分析</a></li>
+      <li><a class="nav-item" data-page="goal">目标生成器</a></li>
+      <li><a class="nav-item" data-page="cert">证书推荐</a></li>
     </ul>
   </div>
 </nav>
 
 <div class="container">
+
+<!-- ===== HOME / TREE HOLE ===== -->
 <div id="home-page" class="tool-page active">
   <div class="welcome-card">
-    <h1>✨ 欢迎来到你的职业规划助手</h1>
-    <p>与AI轻松对话，梳理职业困惑、探索方向，安全、无压力</p>
+    <h1>✨ AI 树洞</h1>
+    <p>和 AI 聊聊你的职业困惑，没有评判，只有倾听和陪伴</p>
   </div>
-  <div class="chat-section">
-    <input type="text" class="name-input" id="userName" placeholder="请输入你的姓名/学号">
+  <div class="card">
+    <input type="text" class="name-input" id="userName" placeholder="你的姓名 / 昵称（老师会看到）">
     <div class="mood-selector">
+      <span class="mood-label">你现在的状态：</span>
       <button class="mood-btn" data-mood="有点迷茫">有点迷茫</button>
       <button class="mood-btn" data-mood="焦虑">焦虑</button>
       <button class="mood-btn" data-mood="充满干劲">充满干劲</button>
@@ -104,297 +174,442 @@ select option:first-child{color:var(--text-gray)}
       <button class="mood-btn" data-mood="平静">平静</button>
     </div>
     <div class="chat-window" id="chatWindow">
-      <div class="chat-message bot-message">嗨～这里是你的私人树洞。不管是职业困惑、方向迷茫，还是对未来的期待，都可以在这里告诉我。你最近在想什么呢？</div>
+      <div class="chat-msg bot-msg">嗨～这里是你的私人树洞。不管是职业困惑、方向迷茫，还是对未来的期待，都可以在这里告诉我。你最近在想什么呢？</div>
     </div>
-    <div class="input-area">
-      <input type="text" id="userInput" placeholder="写下你的想法...">
-      <button class="send-btn" id="sendBtn">提交给老师</button>
+    <p class="chat-hint">按 Enter 发送 · Shift+Enter 换行</p>
+    <div class="chat-input-row">
+      <textarea id="userInput" placeholder="随便写点什么…"></textarea>
+      <button class="send-btn" id="sendBtn" onclick="sendChat()">发送</button>
+    </div>
+    <div class="btn-group" style="margin-top:1rem">
+      <button class="btn btn-light" onclick="submitToWJ('chat')">📤 提交给老师</button>
     </div>
   </div>
 </div>
 
+<!-- ===== SWOT ===== -->
 <div id="swot-page" class="tool-page">
   <div class="welcome-card">
-    <h1>📊 SWOT 职业分析工具</h1>
-    <p>填写四象限内容后点击生成分析，提交后老师将收到你的完整分析</p>
+    <h1>📊 SWOT 职业分析</h1>
+    <p>填写四象限后 AI 帮你梳理，提交后老师可查看你的分析</p>
   </div>
-  <div class="chat-section">
-    <input type="text" class="name-input" id="swotName" placeholder="请输入你的姓名/学号">
+  <div class="card">
+    <input type="text" class="name-input" id="swotName" placeholder="你的姓名 / 昵称">
     <div class="swot-grid">
-      <div class="swot-box">
-        <h4>S 优势</h4>
-        <p>你擅长什么？有哪些能力、经历、资源？</p>
-        <textarea id="sW"></textarea>
+      <div class="swot-box swot-S">
+        <h4>S — 优势</h4>
+        <p class="hint">你擅长什么？有哪些技能、经历、资源？</p>
+        <textarea id="swotS" placeholder="例：逻辑思维强，善于沟通，有一段互联网实习经历…"></textarea>
       </div>
-      <div class="swot-box">
-        <h4>W 劣势</h4>
-        <p>你欠缺什么？哪些方面比较薄弱？</p>
-        <textarea id="wW"></textarea>
+      <div class="swot-box swot-W">
+        <h4>W — 劣势</h4>
+        <p class="hint">你欠缺什么？哪些方面比较薄弱？</p>
+        <textarea id="swotW" placeholder="例：专业课成绩一般，缺少作品集，时间管理较差…"></textarea>
       </div>
-      <div class="swot-box">
-        <h4>O 机会</h4>
-        <p>行业、环境、政策有哪些利好？</p>
-        <textarea id="oW"></textarea>
+      <div class="swot-box swot-O">
+        <h4>O — 机会</h4>
+        <p class="hint">外部有哪些利好？行业、政策、身边资源？</p>
+        <textarea id="swotO" placeholder="例：所在城市互联网发展快，学校有校友资源…"></textarea>
       </div>
-      <div class="swot-box">
-        <h4>T 威胁</h4>
-        <p>竞争、风险、外部不利因素？</p>
-        <textarea id="tW"></textarea>
+      <div class="swot-box swot-T">
+        <h4>T — 威胁</h4>
+        <p class="hint">竞争、风险、外部不利因素？</p>
+        <textarea id="swotT" placeholder="例：同届竞争激烈，目标岗位要求有项目经验…"></textarea>
       </div>
     </div>
     <div class="btn-group">
-      <button class="btn btn-primary" onclick="genSwot()">生成SWOT分析</button>
-      <button class="btn btn-primary" onclick="submitSwot()">提交给老师</button>
+      <button class="btn btn-primary" id="swotAiBtn" onclick="analyzeSwot()">✨ AI 分析</button>
+      <button class="btn btn-light" onclick="submitToWJ('swot')">📤 提交给老师</button>
       <button class="btn btn-light" onclick="clearSwot()">清空</button>
     </div>
     <div class="result-area" id="swotResult"></div>
   </div>
 </div>
 
+<!-- ===== GOAL ===== -->
 <div id="goal-page" class="tool-page">
   <div class="welcome-card">
     <h1>🎯 智能目标生成器</h1>
-    <p>根据你的方向生成目标，提交后老师将收到你的职业规划目标</p>
+    <p>选择你的情况，AI 生成专属分阶段行动路线图</p>
   </div>
-  <div class="chat-section">
-    <input type="text" class="name-input" id="goalName" placeholder="请输入你的姓名/学号">
+  <div class="card">
+    <input type="text" class="name-input" id="goalName" placeholder="你的姓名 / 昵称">
     <div class="goal-form">
       <div class="form-group">
-        <label>你的职业方向</label>
+        <label>你想发展的职业方向</label>
         <select id="goalJob">
-          <option value="">请选择...</option>
-          <option>教师/教育类</option>
-          <option>互联网/产品/运营</option>
-          <option>英语/翻译/跨境</option>
-          <option>设计/创意类</option>
-          <option>公考/事业单位</option>
+          <option value="">请选择…</option>
+          <option>职业生涯规划讲师 / 顾问</option>
+          <option>教师 / 教育类</option>
+          <option>互联网 / 产品 / 运营</option>
+          <option>HR / 人才发展</option>
+          <option>英语 / 翻译 / 跨境</option>
+          <option>设计 / 创意类</option>
+          <option>公考 / 事业单位</option>
+          <option>心理咨询 / 社会工作</option>
+          <option>自由职业 / 独立顾问</option>
         </select>
       </div>
       <div class="form-group">
-        <label>当前阶段</label>
+        <label>你现在的基础阶段</label>
         <select id="goalStage">
-          <option value="">请选择...</option>
-          <option>大一/大二打基础</option>
-          <option>大三准备实习</option>
-          <option>大四求职</option>
-          <option>已工作1-3年</option>
+          <option value="">请选择…</option>
+          <option>完全零基础，刚开始了解</option>
+          <option>读过相关书籍，有初步概念</option>
+          <option>参加过培训课程</option>
+          <option>已有实习 / 工作经验（1-2年）</option>
+          <option>有一定从业经验，想进阶</option>
         </select>
       </div>
       <div class="form-group">
-        <label>目标周期</label>
-        <select id="goalTime">
-          <option value="">请选择...</option>
-          <option>1个月</option>
-          <option>3个月</option>
-          <option>半年</option>
-          <option>1年</option>
-        </select>
+        <label>目标达成周期</label>
+        <div class="horizon-row">
+          <button class="horizon-btn" onclick="selectHorizon(this,'3个月')">3 个月</button>
+          <button class="horizon-btn" onclick="selectHorizon(this,'6个月')">6 个月</button>
+          <button class="horizon-btn" onclick="selectHorizon(this,'1年')">1 年</button>
+          <button class="horizon-btn" onclick="selectHorizon(this,'2年')">2 年</button>
+          <button class="horizon-btn" onclick="selectHorizon(this,'3年以上')">3 年+</button>
+        </div>
       </div>
     </div>
     <div class="btn-group">
-      <button class="btn btn-primary" onclick="genGoal()">生成目标计划</button>
-      <button class="btn btn-primary" onclick="submitGoal()">提交给老师</button>
+      <button class="btn btn-primary" id="goalAiBtn" onclick="generateGoal()">✨ 生成我的目标路线图</button>
+      <button class="btn btn-light" onclick="submitToWJ('goal')">📤 提交给老师</button>
       <button class="btn btn-light" onclick="clearGoal()">清空</button>
     </div>
     <div class="result-area" id="goalResult"></div>
   </div>
 </div>
 
+<!-- ===== CERTS ===== -->
 <div id="cert-page" class="tool-page">
   <div class="welcome-card">
-    <h1>📜 高含金量证书推荐</h1>
-    <p>按方向选择，快速找到适合你的证书</p>
+    <h1>📜 证书推荐</h1>
+    <p>按方向筛选，一眼看清费用、周期、机构，快速决策</p>
   </div>
-  <div class="chat-section">
-    <div class="cert-tabs">
-      <div class="cert-tab active" data-type="edu">教育类</div>
-      <div class="cert-tab" data-type="english">英语类</div>
-      <div class="cert-tab" data-type="it">计算机类</div>
-      <div class="cert-tab" data-type="job">公考职场</div>
+  <div class="card">
+    <div class="cert-filter-row" id="certFilters">
+      <button class="cert-filter-btn active" data-cat="career">职业规划类</button>
+      <button class="cert-filter-btn" data-cat="edu">教育类</button>
+      <button class="cert-filter-btn" data-cat="psych">心理 / 咨询</button>
+      <button class="cert-filter-btn" data-cat="english">英语类</button>
+      <button class="cert-filter-btn" data-cat="it">计算机类</button>
+      <button class="cert-filter-btn" data-cat="hr">HR / 职场</button>
     </div>
-    <div class="cert-cards" id="certCards">
-      <div class="cert-card">
-        <h4>教师资格证</h4>
-        <span class="cert-tag tag-level">必备</span>
-        <span class="cert-tag tag-price">中等</span>
-        <p>教师行业基础准入证书，就业必备，认可度极高。</p>
-      </div>
-      <div class="cert-card">
-        <h4>普通话等级证书</h4>
-        <span class="cert-tag tag-level">必备</span>
-        <span class="cert-tag tag-price">低</span>
-        <p>语文教师需二甲及以上，其他学科二乙即可。</p>
-      </div>
-      <div class="cert-card">
-        <h4>心理健康C证</h4>
-        <span class="cert-tag tag-level">加分</span>
-        <span class="cert-tag tag-price">低</span>
-        <p>适合班主任、德育岗位，提升竞争力。</p>
-      </div>
-    </div>
+    <div class="cert-grid" id="certGrid"></div>
   </div>
 </div>
-</div>
+
+</div><!-- /container -->
 
 <script>
-const WJ_URL = "https://wj.qq.com/s2/26191895/835d/";
+/* ============================================================
+   已替换为：豆包 API 配置
+   只需要在这里填入你的 豆包 API Key
+   ============================================================ */
+const API_KEY = "5853c428-f511-4bfb-9bfd-e11e79e8d565";
+const WJ_URL  = "https://wj.qq.com/s2/26191895/835d/";
 
-document.querySelectorAll('.nav-item').forEach(tab=>{
-  tab.addEventListener('click',e=>{
+/* ============================================================
+   豆包 AI 请求函数（完全替换 Claude）
+   ============================================================ */
+async function callClaude(systemPrompt, userMsg) {
+  const response = await fetch("https://aquasearch.volcengineapi.com/api/v3/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + API_KEY
+    },
+    body: JSON.stringify({
+      model: "doubao-3-lite",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userMsg }
+      ],
+      temperature: 0.7,
+      max_tokens: 1024
+    })
+  });
+
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error?.message || "请求失败");
+  return data.choices[0].message.content;
+}
+
+/* ---- nav ---- */
+document.querySelectorAll('.nav-item').forEach(a => {
+  a.addEventListener('click', e => {
     e.preventDefault();
-    document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
-    document.querySelectorAll('.tool-page').forEach(p=>p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.page+'-page').classList.add('active');
-  })
-})
-
-document.querySelectorAll('.cert-tab').forEach(t=>{
-  t.addEventListener('click',()=>{
-    document.querySelectorAll('.cert-tab').forEach(c=>c.classList.remove('active'));
-    t.classList.add('active');
-    let type=t.dataset.type;
-    let list=document.getElementById('certCards');
-    if(type==='edu'){
-      list.innerHTML=`
-      <div class="cert-card"><h4>教师资格证</h4><span class="cert-tag tag-level">必备</span><span class="cert-tag tag-price">中等</span><p>教师行业基础准入证书，就业必备，认可度极高。</p></div>
-      <div class="cert-card"><h4>普通话等级证书</h4><span class="cert-tag tag-level">必备</span><span class="cert-tag tag-price">低</span><p>语文教师需二甲及以上，其他学科二乙即可。</p></div>
-      <div class="cert-card"><h4>心理健康C证</h4><span class="cert-tag tag-level">加分</span><span class="cert-tag tag-price">低</span><p>适合班主任、德育岗位，提升竞争力。</p></div>`;
-    }else if(type==='english'){
-      list.innerHTML=`
-      <div class="cert-card"><h4>大学英语四六级</h4><span class="cert-tag tag-level">必备</span><span class="cert-tag tag-price">低</span><p>校招、公务员、外企通用硬通货。</p></div>
-      <div class="cert-card"><h4>专四专八</h4><span class="cert-tag tag-level">核心</span><span class="cert-tag tag-price">低</span><p>英语专业核心证书，含金量极高。</p></div>
-      <div class="cert-card"><h4>雅思/托福</h4><span class="cert-tag tag-level">高分</span><span class="cert-tag tag-price">高</span><p>留学、外企、跨境行业强加分。</p></div>`;
-    }else if(type==='it'){
-      list.innerHTML=`
-      <div class="cert-card"><h4>计算机二级</h4><span class="cert-tag tag-level">基础</span><span class="cert-tag tag-price">低</span><p>公务员、事业单位通用基础证书。</p></div>
-      <div class="cert-card"><h4>Python 等级考试</h4><span class="cert-tag tag-level">加分</span><span class="cert-tag tag-price">中</span><p>AI、数据分析岗位非常吃香。</p></div>
-      <div class="cert-card"><h4>软考初级/中级</h4><span class="cert-tag tag-level">高薪</span><span class="cert-tag tag-price">中</span><p>落户、职称、国企事业单位认可度高。</p></div>`;
-    }else{
-      list.innerHTML=`
-      <div class="cert-card"><h4>计算机二级</h4><span class="cert-tag tag-level">基础</span><span class="cert-tag tag-price">低</span><p>公考岗位常见要求。</p></div>
-      <div class="cert-card"><h4>驾驶证</h4><span class="cert-tag tag-level">实用</span><span class="cert-tag tag-price">中</span><p>体制内、行政岗常用。</p></div>
-      <div class="cert-card"><h4>人力资源四级</h4><span class="cert-tag tag-level">职场</span><span class="cert-tag tag-price">中</span><p>行政、人事、综合岗加分。</p></div>`;
-    }
-  })
-})
-
-document.querySelectorAll('.mood-btn').forEach(btn=>{
-  btn.addEventListener('click',(e)=>{
-    if(!e.ctrlKey){
-      document.querySelectorAll('.mood-btn').forEach(b=>b.classList.remove('active'));
-    }
-    btn.classList.toggle('active');
+    document.querySelectorAll('.nav-item').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.tool-page').forEach(p => p.classList.remove('active'));
+    a.classList.add('active');
+    document.getElementById(a.dataset.page + '-page').classList.add('active');
   });
 });
 
-document.getElementById('sendBtn').onclick=function(){
-  let name = document.getElementById('userName').value.trim();
-  let content = document.getElementById('userInput').value.trim();
-  let mood = Array.from(document.querySelectorAll('.mood-btn.active')).map(b=>b.dataset.mood).join('、') || '平静';
+/* ============================================================
+   TREE HOLE
+   ============================================================ */
+let chatHistory = [];
+let selectedMood = '';
 
-  if(!name){alert('请写下你的昵称（想让老师怎么称呼）');return;}
-  if(!content){alert('请写下你的想法');return;}
+document.querySelectorAll('.mood-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selectedMood = btn.dataset.mood;
+  });
+});
 
-  let chat=document.getElementById('chatWindow');
-  chat.innerHTML+=`<div class="chat-message user-message">${content}</div>`;
-  document.getElementById('userInput').value='';
-  chat.scrollTop=chat.scrollHeight;
+document.getElementById('userInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); }
+});
 
-  let p = new URLSearchParams();
-  p.append('Q1', name);
-  p.append('Q2', mood);
-  p.append('Q3', content);
-  p.append('Q4', '');
-  p.append('Q5', '');
-  p.append('Q6', '');
-  p.append('Q7', '');
-  p.append('Q8', '');
-  p.append('Q9', '');
-  p.append('Q10', '');
+function addMsg(text, type) {
+  const win = document.getElementById('chatWindow');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + type;
+  div.textContent = text;
+  win.appendChild(div);
+  win.scrollTop = win.scrollHeight;
+  return div;
+}
 
-  window.open(WJ_URL + '?' + p.toString(), '_blank');
+async function sendChat() {
+  const input = document.getElementById('userInput');
+  const btn   = document.getElementById('sendBtn');
+  const text  = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  btn.disabled = true;
+  addMsg(text, 'user-msg');
+  chatHistory.push({ role: 'user', content: text });
+
+  const thinking = addMsg('思考中…', 'thinking-msg');
+
+  const sys = `你是一位温柔、有洞察力的职业生涯规划顾问，同时也是学生的树洞和倾听者。
+当前学生状态：${selectedMood || '未知'}。
+请用温暖、真诚的语气回应，以倾听共情为主，不说教，结尾适当提一个深入问题帮助对方自我探索。回复在120字以内，用中文。`;
+
+  try {
+    const msgs = chatHistory.slice(-6);
+    const reply = await callClaude(sys,
+      msgs.map(m => (m.role === 'user' ? '学生：' : 'AI：') + m.content).join('\n') +
+      '\n学生：' + text);
+    thinking.remove();
+    addMsg(reply, 'bot-msg');
+    chatHistory.push({ role: 'assistant', content: reply });
+  } catch(err) {
+    thinking.remove();
+    addMsg('连接出了问题，请稍后再试 🙏', 'bot-msg');
+  }
+  btn.disabled = false;
+}
+
+/* ============================================================
+   SWOT
+   ============================================================ */
+async function analyzeSwot() {
+  const s = document.getElementById('swotS').value.trim();
+  const w = document.getElementById('swotW').value.trim();
+  const o = document.getElementById('swotO').value.trim();
+  const t = document.getElementById('swotT').value.trim();
+
+  if (!s && !w && !o && !t) { alert('请先在四个象限填写一些内容'); return; }
+
+  const btn = document.getElementById('swotAiBtn');
+  const res = document.getElementById('swotResult');
+  btn.disabled = true;
+  res.className = 'result-area show';
+  res.innerHTML = '<span class="loading-dots">AI 正在分析你的 SWOT</span>';
+
+  const sys = `你是一位专业的职业生涯规划顾问，请根据学生提供的 SWOT 内容给出洞察性分析。
+格式要求：
+1. 先用一句话总结这位学生的核心优势和关键挑战
+2. 给出3条针对性建议（发挥优势、弥补短板、抓住机会各一条）
+3. 最后给出一个最关键的首要行动建议
+语气专业温和，总字数200字以内，用中文回答。`;
+
+  const userMsg = `优势(S)：${s||'未填写'}
+劣势(W)：${w||'未填写'}
+机会(O)：${o||'未填写'}
+威胁(T)：${t||'未填写'}`;
+
+  try {
+    const reply = await callClaude(sys, userMsg);
+    res.innerHTML = '<h4>✨ AI 分析结果</h4>' + reply.replace(/\n/g, '<br>');
+  } catch(err) {
+    res.innerHTML = '分析失败，请检查网络后重试。错误：' + err.message;
+  }
+  btn.disabled = false;
+}
+
+function clearSwot() {
+  ['swotName','swotS','swotW','swotO','swotT'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+  const r = document.getElementById('swotResult');
+  r.className = 'result-area';
+  r.innerHTML = '';
+}
+
+/* ============================================================
+   GOAL GENERATOR
+   ============================================================ */
+let selectedHorizon = '';
+
+function selectHorizon(btn, val) {
+  document.querySelectorAll('.horizon-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  selectedHorizon = val;
+}
+
+async function generateGoal() {
+  const job   = document.getElementById('goalJob').value;
+  const stage = document.getElementById('goalStage').value;
+  if (!job || !stage || !selectedHorizon) { alert('请填写所有选项'); return; }
+
+  const btn = document.getElementById('goalAiBtn');
+  const res = document.getElementById('goalResult');
+  btn.disabled = true;
+  res.className = 'result-area show';
+  res.innerHTML = '<span class="loading-dots">AI 正在为你生成专属路线图</span>';
+
+  const sys = `你是一位专业的职业生涯规划顾问，请根据学生的情况生成一份分阶段的具体行动路线图。
+要求：
+- 分成4-5个具体里程碑，每个里程碑注明时间节点
+- 每条行动描述要具体可执行（如"报名GCDF培训"而非"学习相关知识"）
+- 最后给出一句激励性的总结
+- 总字数250字以内，语气积极，中文回答`;
+
+  const userMsg = `职业方向：${job}
+当前阶段：${stage}
+目标周期：${selectedHorizon}`;
+
+  try {
+    const reply = await callClaude(sys, userMsg);
+    res.innerHTML = '<h4>🎯 你的专属目标路线图</h4>' + reply.replace(/\n/g, '<br>');
+  } catch(err) {
+    res.innerHTML = '生成失败，请检查网络后重试。错误：' + err.message;
+  }
+  btn.disabled = false;
+}
+
+function clearGoal() {
+  document.getElementById('goalName').value = '';
+  document.getElementById('goalJob').selectedIndex = 0;
+  document.getElementById('goalStage').selectedIndex = 0;
+  document.querySelectorAll('.horizon-btn').forEach(b => b.classList.remove('active'));
+  selectedHorizon = '';
+  const r = document.getElementById('goalResult');
+  r.className = 'result-area';
+  r.innerHTML = '';
+}
+
+/* ============================================================
+   CERTS DATA + RENDER
+   ============================================================ */
+const CERTS = {
+  career: [
+    { name:'GCDF 全球职业规划师', level:'intl', desc:'含金量最高的国际认证，全球认可。需完成线上培训+提交6000字咨询案例报告。适合想走国际化路线的学习者，是目前最受雇主认可的职业规划证书。', cost:'6000-10000 元', duration:'3-6 个月', org:'北森生涯（国内授权机构）' },
+    { name:'CCP 生涯规划师', level:'entry', desc:'向阳生涯体系筑基课程，快速掌握舒伯学派理论体系，适合零基础入门。是进阶 CCDM 的前置课程，学完即可独立做基础咨询。', cost:'3000-5000 元', duration:'1-2 个月', org:'向阳生涯' },
+    { name:'CCDM 中国职业规划师（高级）', level:'mid', desc:'国内认可度最高的中文体系认证，含职业规划理论+咨询技术+案例督导。通过后可申请人社部相应级别国家认证，是讲师和顾问的核心证书。', cost:'10000-16800 元', duration:'3-6 个月', org:'向阳生涯 / CCDMA' },
+    { name:'BSC 职业规划咨询导师（师资级）', level:'adv', desc:'顶级师资认证，专为有志成为讲师和督导者设计。要求已完成 CCDM 并有咨询实践，课程含带教方法论，持证后可独立招生授课。', cost:'20000 元以上', duration:'6-12 个月', org:'向阳生涯' },
+    { name:'UAPM 高考志愿规划师', level:'mid', desc:'细分赛道证书，专注高考志愿咨询服务。市场需求稳定，家长付费意愿强，服务季节性强但单次报酬可观，适合作为副业切入口。', cost:'5000-8000 元', duration:'1-3 个月', org:'向阳生涯' },
+    { name:'ECDM 员工职业发展导师', level:'adv', desc:'企业内训方向认证，面向 HR、管理者、内部培训师。帮助企业员工做职业发展规划，适合想进入 to B 企业培训市场的从业者。', cost:'8000-12000 元', duration:'3-6 个月', org:'向阳生涯' },
+  ],
+  edu: [
+    { name:'教师资格证（中学/小学）', level:'entry', desc:'教师行业基础准入证书，就业必备，全国通用。笔试+面试，每年两次考试机会，建议大二就开始备考。', cost:'考试费约 200 元', duration:'3-6 个月备考', org:'教育部考试中心' },
+    { name:'普通话等级证书', level:'entry', desc:'语文教师需二甲及以上，其他学科二乙即可。考试简单，建议大一就考，越早越好，部分岗位硬性要求。', cost:'50-100 元', duration:'1-2 个月', org:'各省语委办' },
+    { name:'心理健康教育 C 证', level:'mid', desc:'适合班主任、德育岗位，在教师招聘中有明显加分。各省培训机构提供系统课程，考试难度适中。', cost:'500-2000 元', duration:'1-3 个月', org:'各省教育厅认定机构' },
+  ],
+  psych: [
+    { name:'心理咨询师（3级/2级）', level:'mid', desc:'为职业规划加持心理学专业背景。擅长处理职业焦虑、生涯困惑等深层议题，帮助来访者做更深入的自我探索。与职业规划结合是高端顾问的标配。', cost:'培训费差异大，考试费数百元', duration:'6-12 个月', org:'各省人社厅（报名渠道）' },
+    { name:'EAP 员工援助计划咨询师', level:'adv', desc:'企业心理健康服务方向，需有心理咨询基础。市场需求随企业福利意识提升快速增长，to B 服务单价高。', cost:'3000-8000 元', duration:'3-6 个月', org:'各认证机构' },
+    { name:'NLP 执行师 / 教练认证', level:'mid', desc:'沟通与教练技术认证，对职业规划咨询中的提问引导技巧有直接帮助。国际认证版本含金量更高。', cost:'5000-15000 元', duration:'1-3 个月', org:'国际 NLP 协会授权机构' },
+  ],
+  english: [
+    { name:'大学英语六级（CET-6）', level:'entry', desc:'校招、公务员、外企通用硬通货。600分以上具有明显竞争优势，建议大二前搞定，越早越好。', cost:'考试费约 30 元', duration:'3-6 个月备考', org:'教育部考试中心' },
+    { name:'专业英语四级（TEM-4）', level:'mid', desc:'英语专业核心证书，含金量极高，相当于英语专业的"毕业门槛"。建议大二结束前必须通过。', cost:'考试费约 20 元', duration:'按课程节奏备考', org:'全国英语专业四八级考试委员会' },
+    { name:'雅思 / 托福', level:'adv', desc:'留学、外企、跨境行业强加分。雅思 6.5-7 分是留学主流要求，托福 100 分以上具竞争力。考试成本高，备考需系统规划。', cost:'2000-2400 元/次', duration:'3-12 个月备考', org:'British Council / ETS' },
+    { name:'CATTI 翻译资格证书（三级）', level:'mid', desc:'翻译行业专业认证，政府、外企、翻译公司均认可。笔译+口译两个方向，从事职业翻译者必备。', cost:'考试费约 150 元', duration:'6-12 个月备考', org:'外文局' },
+  ],
+  it: [
+    { name:'计算机二级（MS Office / Python）', level:'entry', desc:'公务员、事业单位通用基础证书，部分岗位硬性要求。MS Office 方向最实用，Python 方向含金量更高但难度稍大。', cost:'考试费约 60 元', duration:'1-3 个月备考', org:'教育部考试中心' },
+    { name:'Python 数据分析 / AI 应用证书', level:'mid', desc:'AI 时代职场加分项，在运营、教育、咨询等非技术岗也越来越受欢迎。建议选知名平台（如阿里云、华为）认证版本。', cost:'500-3000 元', duration:'3-6 个月', org:'各大云厂商认证中心' },
+    { name:'软考（信息系统项目管理师）', level:'adv', desc:'国家级软件水平考试，落户、职称、国企央企认可度高。中级难度适中，是计算机背景同学拿职称的主流路径。', cost:'考试费约 108 元', duration:'6-12 个月备考', org:'工业和信息化部' },
+  ],
+  hr: [
+    { name:'人力资源管理师（4级/3级）', level:'entry', desc:'行政、人事、综合岗加分项，是从事 HR 方向的入门证书。4级（助理级）备考难度低，适合在校生提前备考。', cost:'培训+考试约 500-2000 元', duration:'2-4 个月', org:'各省人社厅授权机构' },
+    { name:'PHR / SPHR 人力资源认证', level:'adv', desc:'国际 HR 认证，含金量高于国内证书，在外资企业和大型跨国公司中认可度高。需有一定工作经验。', cost:'考试费约 400 美元', duration:'6-12 个月备考', org:'HRCI（美国人力资源认证协会）' },
+    { name:'劳动关系协调师（3级）', level:'mid', desc:'处理劳动合同、纠纷调解的专项证书，对 HR 日常工作有很强实操价值，在劳动密集型企业尤其受重视。', cost:'培训+考试约 1000-3000 元', duration:'3-6 个月', org:'各省人社厅' },
+  ]
 };
 
-function genSwot(){
-  let s=document.getElementById('sW').value,w=document.getElementById('wW').value;
-  let o=document.getElementById('oW').value,t=document.getElementById('tW').value;
-  let r=document.getElementById('swotResult');
-  r.style.display='block';
-  r.innerHTML=`<h4>SWOT分析结果</h4>
-<p>优势S：${s||'未填写'}</p>
-<p>劣势W：${w||'未填写'}</p>
-<p>机会O：${o||'未填写'}</p>
-<p>威胁T：${t||'未填写'}</p>
-<p>AI建议：发挥优势、抓住机会、弥补短板、规避风险。</p>`;
+const LEVEL_MAP  = { entry:'入门', mid:'进阶', adv:'高级', intl:'国际' };
+const LEVEL_CLASS = { entry:'tag-level-entry', mid:'tag-level-mid', adv:'tag-level-adv', intl:'tag-level-intl' };
+
+function renderCerts(cat) {
+  const grid = document.getElementById('certGrid');
+  grid.innerHTML = (CERTS[cat] || []).map(c => `
+    <div class="cert-card">
+      <h4>${c.name}</h4>
+      <div class="cert-tags">
+        <span class="cert-tag ${LEVEL_CLASS[c.level]}">${LEVEL_MAP[c.level]}</span>
+        <span class="cert-tag tag-cost">💰 ${c.cost}</span>
+        <span class="cert-tag tag-duration">⏱ ${c.duration}</span>
+      </div>
+      <p>${c.desc}</p>
+      <div class="cert-org">🏛 ${c.org}</div>
+    </div>
+  `).join('');
 }
 
-function submitSwot(){
-  let name = document.getElementById('swotName').value.trim();
-  let s=document.getElementById('sW').value,w=document.getElementById('wW').value;
-  let o=document.getElementById('oW').value,t=document.getElementById('tW').value;
-  if(!name){alert('请写下你的昵称（想让老师怎么称呼）');return;}
-  let p = new URLSearchParams();
-  p.append('Q1', name);
-  p.append('Q2', '');
-  p.append('Q3', 'SWOT提交');
-  p.append('Q4', s);
-  p.append('Q5', w);
-  p.append('Q6', o);
-  p.append('Q7', t);
-  p.append('Q8', '');
-  p.append('Q9', '');
-  p.append('Q10', '');
+document.querySelectorAll('.cert-filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.cert-filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderCerts(btn.dataset.cat);
+  });
+});
+renderCerts('career');
+
+/* ============================================================
+   SUBMIT TO 腾讯问卷
+   ============================================================ */
+function submitToWJ(type) {
+  const p = new URLSearchParams();
+  if (type === 'chat') {
+    const name = document.getElementById('userName').value.trim();
+    if (!name) { alert('请先填写姓名'); return; }
+    const msgs = Array.from(document.querySelectorAll('.chat-msg'))
+      .map(m => (m.classList.contains('user-msg') ? '学生：' : 'AI：') + m.textContent).join('\n');
+    p.append('Q1', name);
+    p.append('Q2', selectedMood);
+    p.append('Q3', msgs.slice(0, 1000));
+  } else if (type === 'swot') {
+    const name = document.getElementById('swotName').value.trim();
+    if (!name) { alert('请先填写姓名'); return; }
+    p.append('Q1', name);
+    p.append('Q4', document.getElementById('swotS').value);
+    p.append('Q5', document.getElementById('swotW').value);
+    p.append('Q6', document.getElementById('swotO').value);
+    p.append('Q7', document.getElementById('swotT').value);
+    const aiRes = document.getElementById('swotResult').innerText;
+    p.append('Q3', 'SWOT分析' + (aiRes ? '\n\nAI分析：' + aiRes.slice(0,500) : ''));
+  } else if (type === 'goal') {
+    const name = document.getElementById('goalName').value.trim();
+    if (!name) { alert('请先填写姓名'); return; }
+    p.append('Q1', name);
+    p.append('Q8', document.getElementById('goalJob').value);
+    p.append('Q9', document.getElementById('goalStage').value);
+    p.append('Q10', selectedHorizon);
+    const aiRes = document.getElementById('goalResult').innerText;
+    p.append('Q3', '目标路线' + (aiRes ? '\n\nAI生成：' + aiRes.slice(0,500) : ''));
+  }
   window.open(WJ_URL + '?' + p.toString(), '_blank');
-}
-
-function clearSwot(){
-  document.getElementById('swotName').value='';
-  document.getElementById('sW').value='';
-  document.getElementById('wW').value='';
-  document.getElementById('oW').value='';
-  document.getElementById('tW').value='';
-  document.getElementById('swotResult').style.display='none';
-}
-
-function genGoal(){
-  let job=document.getElementById('goalJob').value,stage=document.getElementById('goalStage').value;
-  let time=document.getElementById('goalTime').value,r=document.getElementById('goalResult');
-  if(!job||!stage||!time){alert('请完整选择');return;}
-  r.style.display='block';
-  r.innerHTML=`<h4>${time}职业目标</h4>
-<p>方向：${job}</p>
-<p>阶段：${stage}</p>
-<p>周期：${time}</p>
-<p>1.梳理核心技能 2.完成项目 3.准备面试 4.每周复盘</p>`;
-}
-
-function submitGoal(){
-  let name = document.getElementById('goalName').value.trim();
-  let job=document.getElementById('goalJob').value,stage=document.getElementById('goalStage').value;
-  let time=document.getElementById('goalTime').value;
-  if(!name){alert('请写下你的昵称（想让老师怎么称呼）');return;}
-  if(!job||!stage||!time){alert('请先生成目标');return;}
-  let p = new URLSearchParams();
-  p.append('Q1', name);
-  p.append('Q2', '');
-  p.append('Q3', '目标提交');
-  p.append('Q4', '');
-  p.append('Q5', '');
-  p.append('Q6', '');
-  p.append('Q7', '');
-  p.append('Q8', job);
-  p.append('Q9', stage);
-  p.append('Q10', time);
-  window.open(WJ_URL + '?' + p.toString(), '_blank');
-}
-
-function clearGoal(){
-  document.getElementById('goalName').value='';
-  document.getElementById('goalJob').selectedIndex=0;
-  document.getElementById('goalStage').selectedIndex=0;
-  document.getElementById('goalTime').selectedIndex=0;
-  document.getElementById('goalResult').style.display='none';
 }
 </script>
 </body>
