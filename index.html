@@ -61,6 +61,9 @@ select option:first-child{color:var(--text-gray)}
 .tag-price{background:#fff3cd;color:#856404}
 .tag-cycle{background:#d1ecf1;color:#0c5460}
 .cert-card p{margin:0.6rem 0;color:var(--text-gray)}
+/* 姓名输入框样式 */
+.name-input{width:100%;max-width:300px;padding:0.8rem;border:1px solid #ddd;border-radius:var(--radius-sm);margin-bottom:1.5rem;font-size:1rem}
+.name-input:focus{outline:none;border-color:var(--primary)}
 @media (max-width:768px){
 .nav-links{gap:1rem}
 .welcome-card h1{font-size:1.6rem}
@@ -68,6 +71,7 @@ select option:first-child{color:var(--text-gray)}
 .input-area{flex-direction:column;align-items:stretch}
 .send-btn{width:100%}
 .btn-group{flex-direction:column}
+.name-input{max-width:100%}
 }
 </style>
 </head>
@@ -86,7 +90,6 @@ select option:first-child{color:var(--text-gray)}
 </nav>
 
 <div class="container">
-
 <!-- 1 AI树洞 -->
 <div id="home-page" class="tool-page active">
   <div class="welcome-card">
@@ -94,19 +97,21 @@ select option:first-child{color:var(--text-gray)}
     <p>与AI轻松对话，梳理职业困惑、探索方向，安全、无压力</p>
   </div>
   <div class="chat-section">
+    <!-- 新增姓名输入框 -->
+    <input type="text" class="name-input" id="userName" placeholder="请输入你的姓名/学号（方便老师对应）">
     <div class="mood-selector">
-      <button class="mood-btn" data-mood="有点迷茫">有点迷茫</button>
-      <button class="mood-btn" data-mood="焦虑">焦虑</button>
-      <button class="mood-btn" data-mood="充满干劲">充满干劲</button>
-      <button class="mood-btn" data-mood="不知从何下手">不知从何下手</button>
-      <button class="mood-btn" data-mood="平静">平静</button>
+      <button class="mood-btn" type="button" data-mood="有点迷茫">有点迷茫</button>
+      <button class="mood-btn" type="button" data-mood="焦虑">焦虑</button>
+      <button class="mood-btn" type="button" data-mood="充满干劲">充满干劲</button>
+      <button class="mood-btn" type="button" data-mood="不知从何下手">不知从何下手</button>
+      <button class="mood-btn" type="button" data-mood="平静">平静</button>
     </div>
     <div class="chat-window" id="chatWindow">
       <div class="chat-message bot-message">嗨～这里是你的私人树洞。不管是职业困惑、方向迷茫，还是对未来的期待，都可以在这里告诉我。你最近在想什么呢？</div>
     </div>
     <div class="input-area">
       <input type="text" id="userInput" placeholder="写下你的想法...">
-      <button class="send-btn" id="sendBtn">发送</button>
+      <button type="button" class="send-btn" id="sendBtn">提交给老师</button>
     </div>
   </div>
 </div>
@@ -115,9 +120,10 @@ select option:first-child{color:var(--text-gray)}
 <div id="swot-page" class="tool-page">
   <div class="welcome-card">
     <h1>📊 SWOT 职业分析工具</h1>
-    <p>填写四象限内容后点击生成分析，我会帮你整理清晰的职业策略</p>
+    <p>填写四象限内容后点击生成分析，提交后老师将收到你的完整分析</p>
   </div>
   <div class="chat-section">
+    <input type="text" class="name-input" id="swotName" placeholder="请输入你的姓名/学号（方便老师对应）">
     <div class="swot-grid">
       <div class="swot-box">
         <h4>S 优势</h4>
@@ -135,232 +141,3 @@ select option:first-child{color:var(--text-gray)}
         <textarea id="oW"></textarea>
       </div>
       <div class="swot-box">
-        <h4>T 威胁</h4>
-        <p>竞争、风险、外部不利因素？</p>
-        <textarea id="tW"></textarea>
-      </div>
-    </div>
-    <div class="btn-group">
-      <button class="btn btn-primary" onclick="genSwot()">生成SWOT分析</button>
-      <button class="btn btn-light" onclick="clearSwot()">清空</button>
-    </div>
-    <div class="result-area" id="swotResult"></div>
-  </div>
-</div>
-
-<!-- 3 目标生成器 -->
-<div id="goal-page" class="tool-page">
-  <div class="welcome-card">
-    <h1>🎯 智能目标生成器</h1>
-    <p>根据你的方向，自动生成可执行、可落地的职业成长目标</p>
-  </div>
-  <div class="chat-section">
-    <div class="goal-form">
-      <div class="form-group">
-        <label>你的职业方向</label>
-        <select id="goalJob">
-          <option value="">请选择...</option>
-          <option>教师/教育类</option>
-          <option>互联网/产品/运营</option>
-          <option>英语/翻译/跨境</option>
-          <option>设计/创意类</option>
-          <option>公考/事业单位</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>当前阶段</label>
-        <select id="goalStage">
-          <option value="">请选择...</option>
-          <option>大一/大二打基础</option>
-          <option>大三准备实习</option>
-          <option>大四求职</option>
-          <option>已工作1-3年</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>目标周期</label>
-        <select id="goalTime">
-          <option value="">请选择...</option>
-          <option>1个月</option>
-          <option>3个月</option>
-          <option>半年</option>
-          <option>1年</option>
-        </select>
-      </div>
-    </div>
-    <div class="btn-group">
-      <button class="btn btn-primary" onclick="genGoal()">生成目标计划</button>
-      <button class="btn btn-light" onclick="clearGoal()">清空</button>
-    </div>
-    <div class="result-area" id="goalResult"></div>
-  </div>
-</div>
-
-<!-- 4 证书推荐 -->
-<div id="cert-page" class="tool-page">
-  <div class="welcome-card">
-    <h1>📜 高含金量证书推荐</h1>
-    <p>按方向选择，快速找到适合你的证书</p>
-  </div>
-  <div class="chat-section">
-    <div class="cert-tabs">
-      <div class="cert-tab active" data-type="edu">教育类</div>
-      <div class="cert-tab" data-type="english">英语类</div>
-      <div class="cert-tab" data-type="it">计算机类</div>
-      <div class="cert-tab" data-type="job">公考职场</div>
-    </div>
-    <div class="cert-cards" id="certCards">
-      <div class="cert-card">
-        <h4>教师资格证</h4>
-        <span class="cert-tag tag-level">必备</span>
-        <span class="cert-tag tag-price">中等</span>
-        <p>教师行业基础准入证书，就业必备，认可度极高。</p>
-      </div>
-      <div class="cert-card">
-        <h4>普通话等级证书</h4>
-        <span class="cert-tag tag-level">必备</span>
-        <span class="cert-tag tag-price">低</span>
-        <p>语文教师需二甲及以上，其他学科二乙即可。</p>
-      </div>
-      <div class="cert-card">
-        <h4>心理健康C证</h4>
-        <span class="cert-tag tag-level">加分</span>
-        <span class="cert-tag tag-price">低</span>
-        <p>适合班主任、德育岗位，提升竞争力。</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div>
-
-<script>
-// 页面切换
-document.querySelectorAll('.nav-item').forEach(tab=>{
-  tab.addEventListener('click',e=>{
-    e.preventDefault();
-    document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
-    document.querySelectorAll('.tool-page').forEach(p=>p.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.page+'-page').classList.add('active');
-  })
-})
-
-// 证书切换
-document.querySelectorAll('.cert-tab').forEach(t=>{
-  t.addEventListener('click',()=>{
-    document.querySelectorAll('.cert-tab').forEach(c=>c.classList.remove('active'));
-    t.classList.add('active');
-    let type=t.dataset.type;
-    let list=document.getElementById('certCards');
-    if(type==='edu'){
-      list.innerHTML=`
-      <div class="cert-card"><h4>教师资格证</h4><span class="cert-tag tag-level">必备</span><span class="cert-tag tag-price">中等</span><p>教师行业基础准入证书，就业必备，认可度极高。</p></div>
-      <div class="cert-card"><h4>普通话等级证书</h4><span class="cert-tag tag-level">必备</span><span class="cert-tag tag-price">低</span><p>语文教师需二甲及以上，其他学科二乙即可。</p></div>
-      <div class="cert-card"><h4>心理健康C证</h4><span class="cert-tag tag-level">加分</span><span class="cert-tag tag-price">低</span><p>适合班主任、德育岗位，提升竞争力。</p></div>`;
-    }else if(type==='english'){
-      list.innerHTML=`
-      <div class="cert-card"><h4>大学英语四六级</h4><span class="cert-tag tag-level">必备</span><span class="cert-tag tag-price">低</span><p>校招、公务员、外企通用硬通货。</p></div>
-      <div class="cert-card"><h4>专四专八</h4><span class="cert-tag tag-level">核心</span><span class="cert-tag tag-price">低</span><p>英语专业核心证书，含金量极高。</p></div>
-      <div class="cert-card"><h4>雅思/托福</h4><span class="cert-tag tag-level">高分</span><span class="cert-tag tag-price">高</span><p>留学、外企、跨境行业强加分。</p></div>`;
-    }else if(type==='it'){
-      list.innerHTML=`
-      <div class="cert-card"><h4>计算机二级</h4><span class="cert-tag tag-level">基础</span><span class="cert-tag tag-price">低</span><p>公务员、事业单位通用基础证书。</p></div>
-      <div class="cert-card"><h4>Python 等级考试</h4><span class="cert-tag tag-level">加分</span><span class="cert-tag tag-price">中</span><p>AI、数据分析岗位非常吃香。</p></div>
-      <div class="cert-card"><h4>软考初级/中级</h4><span class="cert-tag tag-level">高薪</span><span class="cert-tag tag-price">中</span><p>落户、职称、国企事业单位认可度高。</p></div>`;
-    }else{
-      list.innerHTML=`
-      <div class="cert-card"><h4>计算机二级</h4><span class="cert-tag tag-level">基础</span><span class="cert-tag tag-price">低</span><p>公考岗位常见要求。</p></div>
-      <div class="cert-card"><h4>驾驶证</h4><span class="cert-tag tag-level">实用</span><span class="cert-tag tag-price">中</span><p>体制内、行政岗常用。</p></div>
-      <div class="cert-card"><h4>人力资源四级</h4><span class="cert-tag tag-level">职场</span><span class="cert-tag tag-price">中</span><p>行政、人事、综合岗加分。</p></div>`;
-    }
-  })
-})
-
-// 情绪按钮：支持单选/多选
-document.querySelectorAll('.mood-btn').forEach(btn=>{
-  btn.addEventListener('click',(e)=>{
-    // 按住Ctrl/Command点击可多选，否则单选
-    if(!(e.ctrlKey || e.metaKey)){
-      document.querySelectorAll('.mood-btn').forEach(b=>{
-        if(b!==btn) b.classList.remove('active');
-      });
-    }
-    btn.classList.toggle('active');
-  });
-});
-
-// AI树洞发送
-document.getElementById('sendBtn').onclick=function(){
-  let txt=document.getElementById('userInput').value.trim();
-  if(!txt)return;
-  let chat=document.getElementById('chatWindow');
-  let activeMoods=Array.from(document.querySelectorAll('.mood-btn.active')).map(b=>b.dataset.mood).join('、');
-  let user=`<div class="chat-message user-message">${txt}</div>`;
-  chat.innerHTML+=user;
-  document.getElementById('userInput').value='';
-  setTimeout(()=>{
-    let botReply=activeMoods?`我感受到了你现在的${activeMoods}，非常理解你的状态。`: `嗨～收到你的想法啦！`;
-    let bot=`<div class="chat-message bot-message">${botReply} 职业规划本来就是慢慢探索的过程，你可以继续说说你的想法，我会一直陪着你梳理方向、找到适合自己的路。</div>`;
-    chat.innerHTML+=bot;
-    chat.scrollTop=chat.scrollHeight;
-  },700)
-}
-
-// SWOT生成
-function genSwot(){
-  let s=document.getElementById('sW').value;
-  let w=document.getElementById('wW').value;
-  let o=document.getElementById('oW').value;
-  let t=document.getElementById('tW').value;
-  let r=document.getElementById('swotResult');
-  r.style.display='block';
-  r.innerHTML=`
-  <h4>你的SWOT分析结果</h4>
-  <p><strong>优势S：</strong>${s||'未填写'}</p>
-  <p><strong>劣势W：</strong>${w||'未填写'}</p>
-  <p><strong>机会O：</strong>${o||'未填写'}</p>
-  <p><strong>威胁T：</strong>${t||'未填写'}</p>
-  <br>
-  <p><strong>AI建议：</strong>优先发挥你的优势，抓住外部机会；同时针对性弥补短板，规避风险，逐步形成清晰可执行的职业策略。</p>`;
-}
-function clearSwot(){
-  document.getElementById('sW').value='';
-  document.getElementById('wW').value='';
-  document.getElementById('oW').value='';
-  document.getElementById('tW').value='';
-  document.getElementById('swotResult').style.display='none';
-}
-
-// 目标生成
-function genGoal(){
-  let job=document.getElementById('goalJob').value;
-  let stage=document.getElementById('goalStage').value;
-  let time=document.getElementById('goalTime').value;
-  let r=document.getElementById('goalResult');
-  if(!job || !stage || !time){
-    alert('请先完整选择所有选项哦~');
-    return;
-  }
-  r.style.display='block';
-  r.innerHTML=`
-  <h4>${time}职业成长目标</h4>
-  <p><strong>方向：</strong>${job}</p>
-  <p><strong>阶段：</strong>${stage}</p>
-  <p><strong>周期：</strong>${time}</p>
-  <br>
-  <p><strong>生成目标：</strong><br>
-  1. 梳理该领域必备核心技能<br>
-  2. 完成2-3个实战项目/经历<br>
-  3. 准备简历、面试话术与作品集<br>
-  4. 每周固定学习与复盘，稳步推进</p>`;
-}
-function clearGoal(){
-  document.getElementById('goalJob').selectedIndex=0;
-  document.getElementById('goalStage').selectedIndex=0;
-  document.getElementById('goalTime').selectedIndex=0;
-  document.getElementById('goalResult').style.display='none';
-}
-</script>
-</body>
-</html>
