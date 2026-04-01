@@ -24,7 +24,7 @@ body{background:linear-gradient(135deg,#f0f4ff 0%,#e8f4f8 100%);color:var(--text
 .chat-section{background:var(--bg-card);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow)}
 .mood-selector{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem}
 .mood-btn{padding:0.6rem 1.2rem;border:2px solid var(--primary-light);background:var(--bg-card);color:var(--primary);border-radius:20px;font-weight:500;cursor:pointer;transition:all 0.3s}
-.mood-btn:hover,.mood-btn.active{background:var(--primary);color:#fff}
+.mood-btn:hover,.mood-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 .chat-window{background:var(--bg-main);border-radius:var(--radius-sm);padding:1.5rem;min-height:280px;max-height:450px;overflow-y:auto;margin-bottom:1.5rem}
 .chat-message{margin-bottom:1rem;padding:1rem;border-radius:var(--radius-sm);max-width:82%}
 .bot-message{background:var(--primary-light);color:#fff}
@@ -48,7 +48,8 @@ textarea{width:100%;min-height:100px;padding:0.8rem;border:1px solid #ddd;border
 .goal-form{display:grid;gap:1.2rem}
 .form-group{display:flex;flex-direction:column;gap:0.6rem}
 .form-group label{font-weight:500}
-select,input[type="text"]{padding:0.8rem;border:1px solid #ddd;border-radius:var(--radius-sm);font-size:1rem}
+select{padding:0.8rem;border:1px solid #ddd;border-radius:var(--radius-sm);font-size:1rem;background:var(--bg-card)}
+select option:first-child{color:var(--text-gray)}
 .cert-tabs{display:flex;gap:0.8rem;flex-wrap:wrap;margin-bottom:1.5rem}
 .cert-tab{padding:0.6rem 1.2rem;background:#e9ecef;border-radius:20px;cursor:pointer}
 .cert-tab.active{background:var(--primary);color:#fff}
@@ -158,6 +159,7 @@ select,input[type="text"]{padding:0.8rem;border:1px solid #ddd;border-radius:var
       <div class="form-group">
         <label>你的职业方向</label>
         <select id="goalJob">
+          <option value="">请选择...</option>
           <option>教师/教育类</option>
           <option>互联网/产品/运营</option>
           <option>英语/翻译/跨境</option>
@@ -168,6 +170,7 @@ select,input[type="text"]{padding:0.8rem;border:1px solid #ddd;border-radius:var
       <div class="form-group">
         <label>当前阶段</label>
         <select id="goalStage">
+          <option value="">请选择...</option>
           <option>大一/大二打基础</option>
           <option>大三准备实习</option>
           <option>大四求职</option>
@@ -177,6 +180,7 @@ select,input[type="text"]{padding:0.8rem;border:1px solid #ddd;border-radius:var
       <div class="form-group">
         <label>目标周期</label>
         <select id="goalTime">
+          <option value="">请选择...</option>
           <option>1个月</option>
           <option>3个月</option>
           <option>半年</option>
@@ -252,4 +256,111 @@ document.querySelectorAll('.cert-tab').forEach(t=>{
     if(type==='edu'){
       list.innerHTML=`
       <div class="cert-card"><h4>教师资格证</h4><span class="cert-tag tag-level">必备</span><span class="cert-tag tag-price">中等</span><p>教师行业基础准入证书，就业必备，认可度极高。</p></div>
-      <div class="cert-card">...
+      <div class="cert-card"><h4>普通话等级证书</h4><span class="cert-tag tag-level">必备</span><span class="cert-tag tag-price">低</span><p>语文教师需二甲及以上，其他学科二乙即可。</p></div>
+      <div class="cert-card"><h4>心理健康C证</h4><span class="cert-tag tag-level">加分</span><span class="cert-tag tag-price">低</span><p>适合班主任、德育岗位，提升竞争力。</p></div>`;
+    }else if(type==='english'){
+      list.innerHTML=`
+      <div class="cert-card"><h4>大学英语四六级</h4><span class="cert-tag tag-level">必备</span><span class="cert-tag tag-price">低</span><p>校招、公务员、外企通用硬通货。</p></div>
+      <div class="cert-card"><h4>专四专八</h4><span class="cert-tag tag-level">核心</span><span class="cert-tag tag-price">低</span><p>英语专业核心证书，含金量极高。</p></div>
+      <div class="cert-card"><h4>雅思/托福</h4><span class="cert-tag tag-level">高分</span><span class="cert-tag tag-price">高</span><p>留学、外企、跨境行业强加分。</p></div>`;
+    }else if(type==='it'){
+      list.innerHTML=`
+      <div class="cert-card"><h4>计算机二级</h4><span class="cert-tag tag-level">基础</span><span class="cert-tag tag-price">低</span><p>公务员、事业单位通用基础证书。</p></div>
+      <div class="cert-card"><h4>Python 等级考试</h4><span class="cert-tag tag-level">加分</span><span class="cert-tag tag-price">中</span><p>AI、数据分析岗位非常吃香。</p></div>
+      <div class="cert-card"><h4>软考初级/中级</h4><span class="cert-tag tag-level">高薪</span><span class="cert-tag tag-price">中</span><p>落户、职称、国企事业单位认可度高。</p></div>`;
+    }else{
+      list.innerHTML=`
+      <div class="cert-card"><h4>计算机二级</h4><span class="cert-tag tag-level">基础</span><span class="cert-tag tag-price">低</span><p>公考岗位常见要求。</p></div>
+      <div class="cert-card"><h4>驾驶证</h4><span class="cert-tag tag-level">实用</span><span class="cert-tag tag-price">中</span><p>体制内、行政岗常用。</p></div>
+      <div class="cert-card"><h4>人力资源四级</h4><span class="cert-tag tag-level">职场</span><span class="cert-tag tag-price">中</span><p>行政、人事、综合岗加分。</p></div>`;
+    }
+  })
+})
+
+// 情绪按钮：支持单选/多选
+document.querySelectorAll('.mood-btn').forEach(btn=>{
+  btn.addEventListener('click',(e)=>{
+    // 按住Ctrl/Command点击可多选，否则单选
+    if(!(e.ctrlKey || e.metaKey)){
+      document.querySelectorAll('.mood-btn').forEach(b=>{
+        if(b!==btn) b.classList.remove('active');
+      });
+    }
+    btn.classList.toggle('active');
+  });
+});
+
+// AI树洞发送
+document.getElementById('sendBtn').onclick=function(){
+  let txt=document.getElementById('userInput').value.trim();
+  if(!txt)return;
+  let chat=document.getElementById('chatWindow');
+  let activeMoods=Array.from(document.querySelectorAll('.mood-btn.active')).map(b=>b.dataset.mood).join('、');
+  let user=`<div class="chat-message user-message">${txt}</div>`;
+  chat.innerHTML+=user;
+  document.getElementById('userInput').value='';
+  setTimeout(()=>{
+    let botReply=activeMoods?`我感受到了你现在的${activeMoods}，非常理解你的状态。`: `嗨～收到你的想法啦！`;
+    let bot=`<div class="chat-message bot-message">${botReply} 职业规划本来就是慢慢探索的过程，你可以继续说说你的想法，我会一直陪着你梳理方向、找到适合自己的路。</div>`;
+    chat.innerHTML+=bot;
+    chat.scrollTop=chat.scrollHeight;
+  },700)
+}
+
+// SWOT生成
+function genSwot(){
+  let s=document.getElementById('sW').value;
+  let w=document.getElementById('wW').value;
+  let o=document.getElementById('oW').value;
+  let t=document.getElementById('tW').value;
+  let r=document.getElementById('swotResult');
+  r.style.display='block';
+  r.innerHTML=`
+  <h4>你的SWOT分析结果</h4>
+  <p><strong>优势S：</strong>${s||'未填写'}</p>
+  <p><strong>劣势W：</strong>${w||'未填写'}</p>
+  <p><strong>机会O：</strong>${o||'未填写'}</p>
+  <p><strong>威胁T：</strong>${t||'未填写'}</p>
+  <br>
+  <p><strong>AI建议：</strong>优先发挥你的优势，抓住外部机会；同时针对性弥补短板，规避风险，逐步形成清晰可执行的职业策略。</p>`;
+}
+function clearSwot(){
+  document.getElementById('sW').value='';
+  document.getElementById('wW').value='';
+  document.getElementById('oW').value='';
+  document.getElementById('tW').value='';
+  document.getElementById('swotResult').style.display='none';
+}
+
+// 目标生成
+function genGoal(){
+  let job=document.getElementById('goalJob').value;
+  let stage=document.getElementById('goalStage').value;
+  let time=document.getElementById('goalTime').value;
+  let r=document.getElementById('goalResult');
+  if(!job || !stage || !time){
+    alert('请先完整选择所有选项哦~');
+    return;
+  }
+  r.style.display='block';
+  r.innerHTML=`
+  <h4>${time}职业成长目标</h4>
+  <p><strong>方向：</strong>${job}</p>
+  <p><strong>阶段：</strong>${stage}</p>
+  <p><strong>周期：</strong>${time}</p>
+  <br>
+  <p><strong>生成目标：</strong><br>
+  1. 梳理该领域必备核心技能<br>
+  2. 完成2-3个实战项目/经历<br>
+  3. 准备简历、面试话术与作品集<br>
+  4. 每周固定学习与复盘，稳步推进</p>`;
+}
+function clearGoal(){
+  document.getElementById('goalJob').selectedIndex=0;
+  document.getElementById('goalStage').selectedIndex=0;
+  document.getElementById('goalTime').selectedIndex=0;
+  document.getElementById('goalResult').style.display='none';
+}
+</script>
+</body>
+</html>
