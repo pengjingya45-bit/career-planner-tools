@@ -157,7 +157,6 @@ textarea:focus{outline:none;border-color:var(--primary)}
 
 <div class="container">
 
-<!-- ===== HOME / TREE HOLE ===== -->
 <div id="home-page" class="tool-page active">
   <div class="welcome-card">
     <h1>✨ AI 树洞</h1>
@@ -187,7 +186,6 @@ textarea:focus{outline:none;border-color:var(--primary)}
   </div>
 </div>
 
-<!-- ===== SWOT ===== -->
 <div id="swot-page" class="tool-page">
   <div class="welcome-card">
     <h1>📊 SWOT 职业分析</h1>
@@ -226,7 +224,6 @@ textarea:focus{outline:none;border-color:var(--primary)}
   </div>
 </div>
 
-<!-- ===== GOAL ===== -->
 <div id="goal-page" class="tool-page">
   <div class="welcome-card">
     <h1>🎯 智能目标生成器</h1>
@@ -281,7 +278,6 @@ textarea:focus{outline:none;border-color:var(--primary)}
   </div>
 </div>
 
-<!-- ===== CERTS ===== -->
 <div id="cert-page" class="tool-page">
   <div class="welcome-card">
     <h1>📜 证书推荐</h1>
@@ -300,25 +296,17 @@ textarea:focus{outline:none;border-color:var(--primary)}
   </div>
 </div>
 
-</div><!-- /container -->
+</div><script>
 
-<script>
-/* ============================================================
-   ✅ 纯豆包API配置，无任何Claude残留
-   只需要在这里填入你的【火山引擎豆包API Key】
-   ============================================================ */
-const DOUBAO_API_KEY = "5853c428-f511-4bfb-9bfd-e11e79e8d565";
+const CLOUDFLARE_WORKER_URL = "https://doubao-proxy.pengjingya45.workers.dev"; 
 const WJ_URL  = "https://wj.qq.com/s2/26191895/835d/";
 
-/* ============================================================
-   ✅ 纯豆包AI请求函数，完全删除Claude相关逻辑
-   ============================================================ */
+
 async function callAI(systemPrompt, userMsg) {
-  const response = await fetch("https://aquasearch.volcengineapi.com/api/v3/chat/completions", {
+  const response = await fetch(CLOUDFLARE_WORKER_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": "Bearer " + DOUBAO_API_KEY
     },
     body: JSON.stringify({
       model: "doubao-3-lite",
@@ -338,7 +326,6 @@ async function callAI(systemPrompt, userMsg) {
   return data.choices[0].message.content;
 }
 
-/* ---- nav ---- */
 document.querySelectorAll('.nav-item').forEach(a => {
   a.addEventListener('click', e => {
     e.preventDefault();
@@ -349,9 +336,7 @@ document.querySelectorAll('.nav-item').forEach(a => {
   });
 });
 
-/* ============================================================
-   TREE HOLE
-   ============================================================ */
+
 let chatHistory = [];
 let selectedMood = '';
 
@@ -410,9 +395,7 @@ async function sendChat() {
   btn.disabled = false;
 }
 
-/* ============================================================
-   SWOT
-   ============================================================ */
+
 async function analyzeSwot() {
   const s = document.getElementById('swotS').value.trim();
   const w = document.getElementById('swotW').value.trim();
@@ -459,9 +442,7 @@ function clearSwot() {
   r.innerHTML = '';
 }
 
-/* ============================================================
-   GOAL GENERATOR
-   ============================================================ */
+
 let selectedHorizon = '';
 
 function selectHorizon(btn, val) {
@@ -513,9 +494,7 @@ function clearGoal() {
   r.innerHTML = '';
 }
 
-/* ============================================================
-   CERTS DATA + RENDER
-   ============================================================ */
+
 const CERTS = {
   career: [
     { name:'GCDF 全球职业规划师', level:'intl', desc:'含金量最高的国际认证，全球认可。需完成线上培训+提交6000字咨询案例报告。适合想走国际化路线的学习者，是目前最受雇主认可的职业规划证书。', cost:'6000-10000 元', duration:'3-6 个月', org:'北森生涯（国内授权机构）' },
@@ -581,9 +560,7 @@ document.querySelectorAll('.cert-filter-btn').forEach(btn => {
 });
 renderCerts('career');
 
-/* ============================================================
-   SUBMIT TO 腾讯问卷
-   ============================================================ */
+
 function submitToWJ(type) {
   const p = new URLSearchParams();
   if (type === 'chat') {
